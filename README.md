@@ -1,6 +1,6 @@
 # Music-Viz
 
-This code provides a way to take WAV files and convert them into CSV files, using R.
+This code provides a way to take WAV or MP3 files and convert them into CSV files, using R.
 
 I have borrowed heavily from Hansen Johnson's blog:
 https://hansenjohnson.org/post/spectrograms-in-r/
