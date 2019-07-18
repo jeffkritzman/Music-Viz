@@ -6,13 +6,13 @@
 #
 ################################################################
 
-download.files = 0 #if need to get files, set to 1. else, set to 0.
-num.points = 100
-freq.mod = 7
 # set working directory
 setwd("H:/R/Music Viz 2")
 #setwd("~/R/music viz")
 
+download.files = 0 #if need to get files, set to 1. else, set to 0.
+num.points = 100
+freq.mod = 7
 
 ################################################################
 #
@@ -28,17 +28,23 @@ library(signal, warn.conflicts = F, quietly = T) # signal processing functions
 library(oce, warn.conflicts = F, quietly = T) # image plotting functions and nice color maps
 library(tidyr)
 
-#get file lists
+#get file lists, initialize output file lists
 mp3.list <- drive_ls(path = "Music Viz/mp3")
 mp3.list <- drive_ls(path = "Music Viz/mp3") #only works half the time...
 lyric.list <- drive_ls(path = "Music Viz/Lyrics")
 slug.list <- as.vector(rep("", nrow(mp3.list)))
+tidy_lyrics.list <- as.vector(rep("", nrow(mp3.list)))
+spectrogram.list <- as.vector(rep("", nrow(mp3.list)))
+
 #make sure they're in the same order
 mp3.list <- mp3.list[order(mp3.list$name),]
 lyric.list <- lyric.list[order(lyric.list$name),]
 
 for (i in 1:nrow(mp3.list)) {
   slug.list[i] <- str_replace(mp3.list[i, "name"], ".mp3", "")
+  tidy_lyrics.list[i] <- str_replace(lyric.list[i, "name"], ".txt", "_tidy_lyrics.csv")
+  spectrogram.list[i] <- str_replace(mp3.list[i, "name"], ".mp3", "_spectrogram.csv")
+  
   mp3 <- mp3.list[i, ]
   lyrics <- lyric.list[i, ]
   if (download.files == 1) {
@@ -123,4 +129,6 @@ meta.data <- as.data.frame(slug.list)
 names(meta.data) <- "Song"
 meta.data$mp3.file <- mp3.list$name
 meta.data$lyrics.file <- lyric.list$name
+meta.data$tidy_lyrics.file <- tidy_lyrics.list
+meta.data$spectrogram.file <- spectrogram.list
 write.csv(meta.data, file = "metadata.csv", row.names = FALSE)
