@@ -2,7 +2,8 @@
 
 This code provides a way to take WAV or MP3 files and convert them into CSV files, using R. Version 2 also does word count and sentiment analysis on TXT files holding lyrics.
 
-"music viz.r" inputs a locally saved audio file and returns a CSV for plotting a spectrogram
+"music viz.r" inputs a locally saved audio file and returns a CSV for plotting a spectrogram.
+
 "music viz 2.r" inputs audio files and lyrics files from Google Drive and returns multiple files, including spectrograms and sentiment analyses, and a metadata file.
 
 For the spectrogram functionality, I have borrowed heavily from Hansen Johnson's blog:
@@ -10,7 +11,7 @@ https://hansenjohnson.org/post/spectrograms-in-r/
 
 The raw audio files do not need to be edited prior to processing in R.
 
-Basic workflows
+Basic workflows:
 
 "music viz.r"
  * Run R script on desired file
